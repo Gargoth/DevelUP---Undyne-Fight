@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ArrowManagerScript : MonoBehaviour
 {
@@ -27,13 +29,28 @@ public class ArrowManagerScript : MonoBehaviour
     [SerializeField] private float cooldownScaling;
     [SerializeField] private float speedScaling;
 
+    private bool _isRunning;
     private GameObject _arrowPrefab;
     private Coroutine _arrowSpawner;
     
     void Start()
     {
         _arrowPrefab = Resources.Load<GameObject>("Prefabs/ArrowPrefab");
-        _arrowSpawner = StartCoroutine("ArrowSpawner");
+    }
+
+    private void Update()
+    {
+        RunHandler();
+    }
+
+    void RunHandler()
+    {
+        if (!_isRunning && Input.anyKeyDown)
+        {
+            _isRunning = true;
+            _arrowSpawner = StartCoroutine("ArrowSpawner");
+        }
+        
     }
 
     IEnumerator ArrowSpawner()
