@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (_isGameOver && Input.GetKeyDown(KeyCode.Space))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(0);
         }
     }

@@ -6,11 +6,15 @@ using UnityEngine;
 public class ArrowScript : MonoBehaviour
 {
     [SerializeField] public float speed;
+    [SerializeField] private float shieldHitShakeIntensity;
+    [SerializeField] private float playerHitShakeIntensity;
 
     private GameManagerScript _gameManagerScript;
+    private CameraScript _mainCamera;
     void Start()
     {
         _gameManagerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerScript>();;
+        _mainCamera = Camera.main.GetComponent<CameraScript>();
         Destroy(gameObject, 10f);
     }
     
@@ -25,11 +29,13 @@ public class ArrowScript : MonoBehaviour
         if (other.gameObject.CompareTag("Shield"))
         {
             // Debug.Log("Hit Shield!");
+            _mainCamera.Shake(shieldHitShakeIntensity);
             _gameManagerScript.IncreaseScore();
             Destroy(gameObject);
         } else if (other.gameObject.CompareTag("Player"))
         {
             // Debug.Log("Hit Player!");
+            _mainCamera.Shake(playerHitShakeIntensity);
             _gameManagerScript.DecreaseHealth();
             Destroy(gameObject);
         }
