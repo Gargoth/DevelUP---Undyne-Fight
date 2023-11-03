@@ -9,12 +9,18 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private int score;
 
+    private AudioClip _shieldHitSound;
+    private AudioClip _playerHurtSound;
     private bool _isGameOver = false;
     private CanvasUpdateScript _counterCanvas;
     [SerializeField] private GameObject _gameOverUI;
     IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();
+        if (_counterCanvas == null)
+        {
+            _counterCanvas = GameObject.Find("Counter Canvas").GetComponent<CanvasUpdateScript>();
+        }
         UpdateCanvas();
     }
 
@@ -46,10 +52,6 @@ public class GameManagerScript : MonoBehaviour
 
     void UpdateCanvas()
     {
-        if (_counterCanvas == null)
-        {
-            _counterCanvas = GameObject.Find("Counter Canvas").GetComponent<CanvasUpdateScript>();
-        }
         _counterCanvas.SetHealth(health);
         _counterCanvas.SetScore(score);
     }

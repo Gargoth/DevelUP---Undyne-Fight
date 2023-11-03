@@ -276,8 +276,8 @@ MonoBehaviour:
   spawnCooldownOffset: 0.2
   spawnXOffset: 9.2
   spawnYOffset: 5
-  cooldownScaling: 0.99
-  speedScaling: 1.05
+  cooldownScaling: 0.975
+  speedScaling: 1.1
 --- !u!4 &502368979
 Transform:
   m_ObjectHideFlags: 0
